@@ -6,12 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script src="node_modules/tinybind/dist/tinybind.js"></script>
         <title>Vial Inclusiva</title>
     </head>
     <body>
-        <div class="container-fluid">
-            <h1> Vial Inclusiva</h1>
-            <div class="card mb-3" style="max-width: 540px;">
+        <div id="general" class="app container-fluid">
+            <h1>{ data.title }</h1>
+            <div class="card mb-3" style="max-width: 540px;" rv-each-item="data.items" rv-data-id="data.item.id">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                     <svg class="card-img bi bi-people-fill" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -20,36 +21,38 @@
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Ruta Calle Pepe</h5>
-                        <p class="card-text">Esta ruta va desde no se donde a no se cual...</p>
-                        <p class="card-text"><small class="text-muted">Trayecto total: 800 metros</small></p>
+                        <h5 class="card-title">{ item.title }</h5>
+                        <p class="card-text">{ item.description }</p>
+                        <p class="card-text"><small class="text-muted">Trayecto total: { item.distance } metros</small></p>
                     </div>
                     </div>
                 </div>
                 <a href="detail.html" class="float-right block btn btn-primary">Ver más</a>
             </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                    <svg class="card-img bi bi-people-fill" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clip-rule="evenodd"/>
-                    </svg>
-                    </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Ruta bloque pisos</h5>
-                        <p class="card-text"><p class="card-text">Esta ruta va desde no se donde a no se cual...</p>
-                        <p class="card-text"><small class="text-muted">Trayecto total: 472 metros</small></p>
-                    </div>
-                    </div>
-                </div>
-                <a href="detail.html" class="float-right block btn btn-primary">Ver más</a>
-            </div>
-        </div>    
+        </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">     
+            $( document ).ready(function() {
+                var data = {
+                    title: 'Vial Inclusiva',
+                    items: [
+                        {
+                            "title": "Ruta 1",
+                            "description": "Lorem ipsum...",
+                            "distance": "800"
+                        },
+                        {
+                            "title": "Ruta 2",
+                            "description": "Lorem ipsum.......",
+                            "distance": "750"
+                        }
+                    ]
+                };   
+                tinybind.bind($('#general'), {data: data})
+            });
+        </script>
     </body>
 </html>
